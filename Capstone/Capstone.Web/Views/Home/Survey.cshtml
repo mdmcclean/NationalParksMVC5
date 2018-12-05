@@ -1,0 +1,49 @@
+﻿@using Capstone.Web.Models
+@model List<SelectListItem>
+@{
+    ViewBag.Title = "Survey";
+}
+<link rel="stylesheet" href="~/Content/Survey.css" />
+
+@using (Html.BeginForm("Survey", "Home", FormMethod.Post))
+{
+    <div class="surveyContainer">
+        <h1 style="text-align:center; padding-top:15px">Survey</h1>
+        <p style="padding:15px">We appreciate all feedback from our National Park guests. Please take the time to fill out a short survey to provide us with your favorite National Park!</p>
+        <div>
+            <div class="inputPrompt">@Html.Label("Favorite National Park: ")</div>
+            @Html.DropDownList("ParkCode", Model)
+        </div>
+        <div class="required">
+            <div class="inputPrompt">@Html.Label("Your email: ")</div>
+            @Html.TextBox("EmailAddress", "", new { placeholder = "email" })
+            @Html.ValidationMessage("EmailAddress", new { @class = "badInput" })
+        </div>
+        <div>
+            <div class="inputPrompt">@Html.Label("State of Residence: ")</div>
+            @Html.DropDownList("State", Survey.States)
+        </div>
+        <div>
+            <div class="inputPrompt">@Html.Label("Activity Level: ")</div>
+            <div class="radioButton">
+                @Html.RadioButton("ActivityLevel", "Inactive", true)
+                @Html.Label("Inactive")
+            </div>
+            <div class="radioButton">
+                @Html.RadioButton("ActivityLevel", "Sedentary", false)
+                @Html.Label("Sedentary")
+            </div>
+            <div class="radioButton">
+                @Html.RadioButton("ActivityLevel", "Active", false)
+                @Html.Label("Active")
+            </div>
+            <div class="radioButton">
+                @Html.RadioButton("ActivityLevel", "Extremely Active", false)
+                @Html.Label("Extremely Active")
+            </div>
+        </div>
+        <button class="submitButton">Submit</button>
+    </div>
+
+
+}

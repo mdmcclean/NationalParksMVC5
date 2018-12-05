@@ -1,0 +1,26 @@
+﻿@model List<Capstone.Web.Models.Park>
+@{
+    ViewBag.Title = "National Park Home Page";
+}
+
+<link rel="stylesheet" href="~/Content/Homepage.css">
+
+<div class=" = outterBox">
+    @foreach (var park in Model)
+    {
+        <div class="parkBox">
+            <div class="imageBlock">
+                <a href="~/Home/Detail/@(park.ParkCode)"><img src="~/Content/Parks/@(park.ParkCode).jpg" width="100%" /></a>
+            </div>
+            <div class="nameAndDesc">
+                <div class="name">
+                    <a href="~/Home/Detail/@(park.ParkCode)">@park.ParkName</a>
+                </div>
+                <div class="description">
+                    @park.ParkDescription
+                </div>
+            </div>
+        </div>
+        <hr />
+    }
+</div>

@@ -1,0 +1,88 @@
+﻿@using Capstone.Web.Models
+@model Capstone.Web.Models.Park
+@{
+    ViewBag.Title = Model.ParkName;
+}
+
+
+<div class="bigContainer">
+    <div class="detail-container">
+        <div class="detail-image-block">
+            <img src="~/Content/Parks/@(Model.ParkCode).jpg" class="detail-image" />
+            <div style="width: 80%; margin-left: 5%; margin-top: 5px;">"@Model.InspirationalQuote"</div>
+            <div style="margin-left: 5%;"><i>-@Model.QuoteSource</i></div>
+        </div>
+        <div class="detail-info">
+            <div style="font-weight: bolder; font-size: 36px;">@Model.ParkName</div>
+            <div style="margin-top: 20px;"><div class="detail-category">Year Founded:</div> @Model.YearFounded</div>
+            <div><div class="detail-category">State:</div> @Model.State</div>
+            <div><div class="detail-category">Elevation:</div> @Model.ElevationInFt.ToString("N0") feet</div>
+            <div><div class="detail-category">Acreage:</div> @Model.Acreage.ToString("N0") acres</div>
+            <div><div class="detail-category">Climate:</div> @Model.Climate</div>
+            <div><div class="detail-category">Miles of Trail:</div> @Model.MilesOfTrail.ToString("N0") miles</div>
+            <div><div class="detail-category"># of Campsites:</div> @Model.NumberOfCampsites.ToString("N0")</div>
+            <div><div class="detail-category">Annual Visitor Count:</div> @Model.AnnualVistorCount.ToString("N0")</div>
+            <div><div class="detail-category">Entry Fee:</div> @Model.EntryFee.ToString("C")</div>
+            <div><div class="detail-category"># of Animal Species:</div> @Model.AnimalSpeciesCount.ToString("N0")</div>
+            <div><div class="detail-category" style="margin-top: 10px;">Park Description:</div> @Model.ParkDescription</div>
+        </div>
+    </div>
+
+    <div class="weather-conatiner debug">
+        <div class="weather-header">5-Day Weather Forecast</div>
+        @if ((bool)Session["isFahrenheit"])
+        {
+            <div class="weather-header"><input type="button" value="Switch Temperature to Celsius" onclick="location.href='@Url.Action("ChangeTemp", "Home", new { id = Model.ParkCode }, null)'" /></div>
+        }
+        else
+        {
+            <div class="weather-header"><input type="button" value="Switch Temperature to Fahrenheit" onclick="location.href='@Url.Action("ChangeTemp", "Home", new { id = Model.ParkCode }, null)'" /></div>
+        }
+        @foreach (Weather forecast in Model.FiveDayForecast)
+        {
+            if (forecast.FiveDayForecastValue == 1)
+            {
+                <div class="weather-block weather-primary debug">
+                    <div class="weather-day">Today</div>
+                    <div class="weather-image-block"><img src="~/Content/Weather/@(forecast.ForecastImageName).png" class="weather-image" /></div>
+                    @if ((bool)Session["isFahrenheit"])
+                    {
+                        <div class="weather-temps-block debug">
+                            <div class="weather-temps debug"><b>Low:</b> @(forecast.LowTemp)° F</div>
+                            <div class="weather-temps debug"><b>High:</b> @(forecast.HighTemp)° F</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="weather-temps-block debug">
+                            <div class="weather-temps debug"><b>Low:</b> @(forecast.LowTempCelsius)° C</div>
+                            <div class="weather-temps debug"><b>High:</b> @(forecast.HighTempCelsius)° C</div>
+                        </div>
+                    }
+                    <div class="weather-advisory-block"><b>Weather Advisory:</b> @forecast.ForecastAdvisory</div>
+                </div>
+            }
+            else
+            {
+                <div class="weather-block weather-secondary debug">
+                    <div class="weather-day">@forecast.DayOfWeekStr</div>
+                    <div class="weather-image-block"><img src="~/Content/Weather/@(forecast.ForecastImageName).png" class="weather-image" /></div>
+                    @if ((bool)Session["isFahrenheit"])
+                    {
+                        <div class="weather-temps debug"><b>Low:</b> @(forecast.LowTemp)° F</div>
+                        <div class="weather-temps debug"><b>High:</b> @(forecast.HighTemp)° F</div>
+                    }
+                    else
+                    {
+                        <div class="weather-temps debug"><b>Low:</b> @(forecast.LowTempCelsius)° C</div>
+                        <div class="weather-temps debug"><b>High:</b> @(forecast.HighTempCelsius)° C</div>
+                    }
+                </div>
+
+            }
+
+        }
+    </div>
+</div>
+
+@*@Html.ActionLink("Switch Tempurature", "ChangeTemp", "Home", new { id = Model.ParkCode }, null)*@

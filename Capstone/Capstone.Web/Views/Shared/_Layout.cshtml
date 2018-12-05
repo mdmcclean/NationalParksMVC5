@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/Park.css">
+    <link rel="stylesheet" href="~/Content/NavbarSS.css">
+</head>
+<body class="backgroundImage">
+    <div class="wrapper">
+        <header>
+            <a href="~/Home/Index"><img src="~/Content/logo.png" style="height: 150px" alt="National Park geek logo" /></a>
+        </header>
+        <nav>
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Survey", "Survey", "Home")</li>
+                <li>@Html.ActionLink("Favorite Parks", "FavoritePark", "Home")</li>
+            </ul>
+        </nav>
+        <div>
+            @RenderBody()
+        </div>
+        <div class="push"></div>
+    </div>
+    <div class="footer">
+        ASP.NET MVC 5 Project made by Zach Chaney & Michael McClean
+    </div>
+</body>
+</html>

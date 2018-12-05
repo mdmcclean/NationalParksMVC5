@@ -1,0 +1,41 @@
+﻿.outterBox{
+    display: block;
+    max-width: 1100px;
+    margin:auto;
+    min-width:850px;
+}
+.parkBox{
+    display: block;
+    width: 90%;
+    margin:auto;
+    min-width:800px;
+    margin-top:10px;
+    margin-bottom:10px;
+    background-color: lightblue;
+    opacity: 0.9;
+    padding: 10px;
+    border-radius: 7px;
+
+}
+.imageBlock{
+    display:inline-block;
+    width: 35%;
+    margin:auto;
+}
+.nameAndDesc{
+    display:inline-block;
+    width:60%;
+    vertical-align:top;
+    padding-left:15px;
+}
+.name{
+    display:block;
+    font-weight:bold;
+    font-size:xx-large;
+    vertical-align:top;
+    padding-top:10px;
+}
+.description{
+    display:block;
+    padding-top:30px;
+}

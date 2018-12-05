@@ -1,0 +1,50 @@
+﻿@model System.Collections.Generic.List<Capstone.Web.Models.FavoriteParks>
+<link rel="stylesheet" href="~/Content/Survey.css" />
+@{
+    ViewBag.Title = "Top National Parks";
+}
+
+<div class="outterBox">
+    <div class="parkBox">
+        <h1 style="text-align:center">Favorite National Parks</h1>
+        <p style="padding:15px">Based on your survey results, we are able to compile a list of your favorite National Parks. We value your feedback and strive to make your stay at one of our National Parks a memorable one!</p>
+        <p style="padding:15px">If you would like to take the survey, go to our @(Html.ActionLink("Survey Page", "Survey", "Home"))</p> 
+    </div>
+    <hr />
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="parkBox">
+            <div class="picture">
+                <a href="~/Home/Detail/@(Model[i].ParkCode)">
+                    <img src="~/Content/Parks/@(Model[i].ParkCode).jpg" height="150" style="border-radius:7px" />
+                </a>
+            </div>
+            <div class="content">
+                <a href="~/Home/Detail/@(Model[i].ParkCode)">
+                    <div class="parkName">@Model[i].ParkName</div>
+                </a>
+                <div class="parkState">@Model[i].State.ToUpper()</div>
+                <div class="quote">"@Model[i].InspirationalQuote"</div>
+                <div class="quoteSource">-@Model[i].QuoteSource</div>
+</div>
+            <div class="voteBox">
+                @if (i == 0)
+                {
+                    <div class="mostPopular">MOST POPULAR!!</div>
+                }
+                @if (Model[i].SurveyCount == 1)
+                {
+                    <div class="votes">@Model[i].SurveyCount Vote</div>
+                }
+                else
+                {
+                    <div class="votes">@Model[i].SurveyCount Votes</div>
+                }
+
+            </div>
+        </div>
+        <div style="height:5px"></div>
+        <hr />
+        <div style="height:5px"></div>
+    }
+</div>
